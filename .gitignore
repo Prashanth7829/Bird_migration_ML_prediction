@@ -11,11 +11,7 @@ __pycache__/
 models/*.joblib
 models/*.pkl
 
-# Generated model outputs
-models/model_metrics.csv
-models/evaluation_results.joblib
-models/feature_importance.json
-models/model_metadata.json
+
 
 # Streamlit
 .streamlit/secrets.toml

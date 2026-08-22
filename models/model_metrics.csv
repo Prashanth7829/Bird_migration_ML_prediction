@@ -1,0 +1,7 @@
+rank,model_key,model,accuracy,precision,recall,f1_score,roc_auc,cv_roc_auc,training_time_seconds
+1,gradient_boosting,Gradient Boosting,0.522,0.5238,0.6801,0.5918,0.5242,0.5121,2321.73
+2,logistic_regression,Logistic Regression,0.52,0.524,0.631,0.5726,0.5211,0.5106,40.9
+3,random_forest,Random Forest,0.5095,0.5095,1.0,0.6751,0.5119,0.5152,65.0
+4,decision_tree,Decision Tree,0.4965,0.5064,0.4652,0.4849,0.4998,0.513,93.11
+5,knn,KNN,0.4985,0.5078,0.5132,0.5105,0.4921,0.5171,481.63
+6,svm,SVM,0.512,0.5111,0.9696,0.6694,0.488,0.5079,14358.5
