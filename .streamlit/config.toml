@@ -1,0 +1,33 @@
+[theme]
+base = "light"
+primaryColor = "#4F46E5"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F5F7FB"
+textColor = "#14213D"
+borderColor = "#D9E1EF"
+greenColor = "#1A7F37"
+greenBackgroundColor = "#EAF7ED"
+greenTextColor = "#116329"
+redColor = "#C7382D"
+orangeColor = "#B86800"
+violetColor = "#4F46E5"
+chartCategoricalColors = ["#1A7F37", "#4F46E5", "#0F766E", "#B86800", "#C7382D", "#64748B"]
+baseRadius = "medium"
+buttonRadius = "medium"
+showWidgetBorder = true
+showSidebarBorder = true
+font = "sans-serif"
+headingFont = "sans-serif"
+
+[theme.sidebar]
+backgroundColor = "#0D2350"
+secondaryBackgroundColor = "#173870"
+textColor = "#FFFFFF"
+borderColor = "#27477C"
+primaryColor = "#8B7CFF"
+
+[server]
+maxUploadSize = 50
+
+[client]
+showErrorDetails = "none"

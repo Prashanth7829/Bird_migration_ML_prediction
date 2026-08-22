@@ -1,0 +1,29 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Trained model artifacts
+models/*.joblib
+models/*.pkl
+
+# Generated model outputs
+models/model_metrics.csv
+models/evaluation_results.joblib
+models/feature_importance.json
+models/model_metadata.json
+
+# Streamlit
+.streamlit/secrets.toml
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

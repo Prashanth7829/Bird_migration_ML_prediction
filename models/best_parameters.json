@@ -1,0 +1,35 @@
+{
+  "logistic_regression": {
+    "model__penalty": "l1",
+    "model__C": 0.1
+  },
+  "decision_tree": {
+    "model__min_samples_split": 2,
+    "model__min_samples_leaf": 10,
+    "model__max_depth": 15,
+    "model__criterion": "gini"
+  },
+  "knn": {
+    "model__weights": "distance",
+    "model__n_neighbors": 11,
+    "model__metric": "manhattan"
+  },
+  "svm": {
+    "model__kernel": "rbf",
+    "model__gamma": "scale",
+    "model__C": 0.1
+  },
+  "gradient_boosting": {
+    "model__subsample": 1.0,
+    "model__n_estimators": 50,
+    "model__max_depth": 2,
+    "model__learning_rate": 0.05
+  },
+  "random_forest": {
+    "model__n_estimators": 150,
+    "model__min_samples_split": 10,
+    "model__min_samples_leaf": 4,
+    "model__max_features": "log2",
+    "model__max_depth": 20
+  }
+}
