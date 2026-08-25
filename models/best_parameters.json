@@ -1,35 +1,41 @@
 {
   "logistic_regression": {
-    "model__penalty": "l1",
-    "model__C": 0.1
+    "classifier__solver": "lbfgs",
+    "classifier__class_weight": null,
+    "classifier__C": 0.1
   },
   "decision_tree": {
-    "model__min_samples_split": 2,
-    "model__min_samples_leaf": 10,
-    "model__max_depth": 15,
-    "model__criterion": "gini"
+    "classifier__min_samples_split": 10,
+    "classifier__min_samples_leaf": 8,
+    "classifier__max_depth": 7,
+    "classifier__criterion": "entropy",
+    "classifier__class_weight": null
   },
   "knn": {
-    "model__weights": "distance",
-    "model__n_neighbors": 11,
-    "model__metric": "manhattan"
+    "classifier__weights": "distance",
+    "classifier__p": 1,
+    "classifier__n_neighbors": 31
   },
   "svm": {
-    "model__kernel": "rbf",
-    "model__gamma": "scale",
-    "model__C": 0.1
+    "classifier__kernel": "rbf",
+    "classifier__gamma": "auto",
+    "classifier__class_weight": null,
+    "classifier__C": 10
   },
   "gradient_boosting": {
-    "model__subsample": 1.0,
-    "model__n_estimators": 50,
-    "model__max_depth": 2,
-    "model__learning_rate": 0.05
+    "classifier__subsample": 0.8,
+    "classifier__n_estimators": 200,
+    "classifier__min_samples_split": 10,
+    "classifier__min_samples_leaf": 4,
+    "classifier__max_depth": 3,
+    "classifier__learning_rate": 0.15
   },
   "random_forest": {
-    "model__n_estimators": 150,
-    "model__min_samples_split": 10,
-    "model__min_samples_leaf": 4,
-    "model__max_features": "log2",
-    "model__max_depth": 20
+    "classifier__n_estimators": 400,
+    "classifier__min_samples_split": 2,
+    "classifier__min_samples_leaf": 2,
+    "classifier__max_features": "sqrt",
+    "classifier__max_depth": null,
+    "classifier__class_weight": "balanced_subsample"
   }
 }

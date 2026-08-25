@@ -1,0 +1,75 @@
+{
+    "research_question": 6,
+    "question": "Which features have the greatest influence on migration success, and how effectively can machine learning models predict successful and unsuccessful migrations?",
+    "dataset_records": 10000,
+    "approved_features": 27,
+    "baseline_success_rate": 0.5,
+    "champion_model": "Gradient Boosting",
+    "champion_accuracy": 0.8845,
+    "champion_precision": 0.881978939002583,
+    "champion_recall": 0.8878,
+    "champion_f1": 0.8848798963420712,
+    "champion_roc_auc": 0.9572732799999999,
+    "top_10_features": [
+        {
+            "rank": 1,
+            "feature": "Food_Supply_Level",
+            "feature_category": "Behavioral",
+            "overall_importance_score": 0.8760034294489802
+        },
+        {
+            "rank": 2,
+            "feature": "Temperature_C",
+            "feature_category": "Environmental",
+            "overall_importance_score": 0.7815819977409328
+        },
+        {
+            "rank": 3,
+            "feature": "Weather_Condition",
+            "feature_category": "Environmental",
+            "overall_importance_score": 0.6018107723358415
+        },
+        {
+            "rank": 4,
+            "feature": "Visibility_km",
+            "feature_category": "Environmental",
+            "overall_importance_score": 0.2720433671322128
+        },
+        {
+            "rank": 5,
+            "feature": "Wind_Speed_kmph",
+            "feature_category": "Environmental",
+            "overall_importance_score": 0.197872109638489
+        },
+        {
+            "rank": 6,
+            "feature": "Predator_Sightings",
+            "feature_category": "Behavioral",
+            "overall_importance_score": 0.15766162475080248
+        },
+        {
+            "rank": 7,
+            "feature": "Flock_Size",
+            "feature_category": "Behavioral",
+            "overall_importance_score": 0.15324730615479198
+        },
+        {
+            "rank": 8,
+            "feature": "Average_Speed_kmph",
+            "feature_category": "Flight Characteristics",
+            "overall_importance_score": 0.15315134317664747
+        },
+        {
+            "rank": 9,
+            "feature": "Max_Altitude_m",
+            "feature_category": "Flight Characteristics",
+            "overall_importance_score": 0.12285793928003633
+        },
+        {
+            "rank": 10,
+            "feature": "Flight_Duration_hours",
+            "feature_category": "Flight Characteristics",
+            "overall_importance_score": 0.11526904103188014
+        }
+    ]
+}
