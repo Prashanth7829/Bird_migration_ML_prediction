@@ -1,16 +1,24 @@
 {
-  "target_column": "Migration_Success_Num",
-  "feature_columns": [
+  "random_state": 42,
+  "test_size": 0.2,
+  "cv_folds": 3,
+  "random_search_iterations": 12,
+  "n_jobs": 2,
+  "train_rows": 8000,
+  "test_rows": 2000,
+  "total_rows": 10000,
+  "feature_count": 27,
+  "features": [
     "Species",
     "Region",
     "Habitat",
     "Origin",
     "Migration_Reason",
     "Weather_Condition",
-    "Migrated_in_Flock",
-    "Food_Supply_Level",
     "Migration_Start_Month",
     "Migration_End_Month",
+    "Migrated_in_Flock",
+    "Food_Supply_Level",
     "Start_Latitude",
     "Start_Longitude",
     "End_Latitude",
@@ -36,10 +44,10 @@
     "Origin",
     "Migration_Reason",
     "Weather_Condition",
-    "Migrated_in_Flock",
-    "Food_Supply_Level",
     "Migration_Start_Month",
-    "Migration_End_Month"
+    "Migration_End_Month",
+    "Migrated_in_Flock",
+    "Food_Supply_Level"
   ],
   "numeric_features": [
     "Start_Latitude",
@@ -60,49 +68,12 @@
     "Predator_Sightings",
     "Flock_Size"
   ],
-  "train_rows": 8000,
-  "test_rows": 2000,
-  "test_size": 0.2,
-  "cv_folds": 3,
-  "random_search_iterations": 8,
-  "random_state": 42,
-  "trained_at_utc": "2026-08-22T19:10:33.083493+00:00",
+  "target_column": "Migration_Success_Num",
   "champion_key": "gradient_boosting",
   "champion_model": "Gradient Boosting",
-  "champion_accuracy": 0.522,
-  "champion_precision": 0.5238,
-  "champion_recall": 0.6801,
-  "champion_f1": 0.5918,
-  "champion_roc_auc": 0.5242,
-  "excluded_post_outcome_features": [
-    "Migration_Success",
-    "Migration_Interrupted",
-    "Interrupted_Reason",
-    "Recovery_Location_Known",
-    "Recovery_Time_days",
-    "Nesting_Success"
-  ],
-  "excluded_analysis_features": [
-    "Cluster",
-    "Migration_Behavior_Cluster",
-    "Path"
-  ],
-  "excluded_redundant_features": [
-    "Migration_Success",
-    "Migration_Success_Num",
-    "Food_Supply_Num",
-    "Flock_Size_Band",
-    "Flock_Size_Num",
-    "Flight_Distance_Category",
-    "Speed_Category",
-    "Altitude_Category",
-    "Temperature_Category",
-    "Wind_Speed_Category",
-    "Visibility_Category",
-    "Humidity_Category"
-  ],
-  "tracking_features_reviewed": [
-    "Tag_Battery_Level_%",
-    "Tracking_Quality"
-  ]
+  "champion_accuracy": 0.834,
+  "champion_precision": 0.8346693386773547,
+  "champion_recall": 0.833,
+  "champion_f1": 0.8338338338338338,
+  "champion_roc_auc": 0.9134950000000001
 }

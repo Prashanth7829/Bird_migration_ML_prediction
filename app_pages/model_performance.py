@@ -34,6 +34,10 @@ st.caption(
 )
 
 
+# ============================================================
+# CHECK MODEL RESULTS
+# ============================================================
+
 if metrics.empty:
 
     st.warning(
@@ -49,9 +53,7 @@ if metrics.empty:
 # Q6 — MODEL PERFORMANCE
 # ============================================================
 
-st.header(
-    "6. Machine Learning Prediction"
-)
+st.header("Machine Learning Prediction")
 
 st.caption(
     "Research Question: Which features have the greatest influence "
@@ -68,39 +70,40 @@ champion = metrics.iloc[0]
 
 c1, c2, c3, c4 = st.columns(4)
 
+
 with c1:
     st.metric(
-        "Best model",
-        champion["model"],
+        "Best Model",
+        str(champion["model"]),
     )
+
 
 with c2:
     st.metric(
         "Accuracy",
-        f"{champion['accuracy']:.3f}",
+        f"{float(champion['accuracy']):.2%}",
     )
+
 
 with c3:
     st.metric(
-        "F1-score",
-        f"{champion['f1_score']:.3f}",
+        "F1 Score",
+        f"{float(champion['f1_score']):.2%}",
     )
+
 
 with c4:
     st.metric(
         "ROC-AUC",
-        f"{champion['roc_auc']:.3f}",
+        f"{float(champion['roc_auc']):.2%}",
     )
 
 
 # ============================================================
-# COMPARISON TABLE
+# MODEL COMPARISON TABLE
 # ============================================================
 
-st.subheader(
-    "Model comparison"
-)
-
+st.subheader("📊 Model Comparison")
 
 comparison = metrics[
     [
@@ -119,106 +122,108 @@ comparison.columns = [
     "Accuracy",
     "Precision",
     "Recall",
-    "F1",
+    "F1 Score",
     "ROC-AUC",
 ]
 
 
+# ------------------------------------------------------------
+# Convert metrics from decimal to percentage
+# ------------------------------------------------------------
+
+percentage_columns = [
+    "Accuracy",
+    "Precision",
+    "Recall",
+    "F1 Score",
+    "ROC-AUC",
+]
+
+comparison_display = comparison.copy()
+
+for column in percentage_columns:
+    comparison_display[column] = (
+        comparison_display[column] * 100
+    )
+
+
 st.dataframe(
-    comparison,
+    comparison_display,
     hide_index=True,
-    use_container_width=True,
+    width="stretch",
     column_config={
-        "Accuracy":
-            st.column_config.NumberColumn(
-                format="%.3f"
-            ),
-        "Precision":
-            st.column_config.NumberColumn(
-                format="%.3f"
-            ),
-        "Recall":
-            st.column_config.NumberColumn(
-                format="%.3f"
-            ),
-        "F1":
-            st.column_config.NumberColumn(
-                format="%.3f"
-            ),
-        "ROC-AUC":
-            st.column_config.NumberColumn(
-                format="%.3f"
-            ),
+
+        "Accuracy": st.column_config.NumberColumn(
+            format="%.2f%%"
+        ),
+
+        "Precision": st.column_config.NumberColumn(
+            format="%.2f%%"
+        ),
+
+        "Recall": st.column_config.NumberColumn(
+            format="%.2f%%"
+        ),
+
+        "F1 Score": st.column_config.NumberColumn(
+            format="%.2f%%"
+        ),
+
+        "ROC-AUC": st.column_config.NumberColumn(
+            format="%.2f%%"
+        ),
     },
 )
 
 
 # ============================================================
-# MODEL COMPARISON CHART
+# PERFORMANCE INTERPRETATION
 # ============================================================
 
-metric_long = comparison.melt(
-    id_vars="Model",
-    value_vars=[
-        "Accuracy",
-        "Precision",
-        "Recall",
-        "F1",
-        "ROC-AUC",
-    ],
-    var_name="Metric",
-    value_name="Score",
-)
+st.subheader("💡 Performance Interpretation")
+
+best_f1_model = metrics.loc[
+    metrics["f1_score"].idxmax()
+]
+
+best_auc_model = metrics.loc[
+    metrics["roc_auc"].idxmax()
+]
+
+best_accuracy_model = metrics.loc[
+    metrics["accuracy"].idxmax()
+]
 
 
-chart = (
-    alt.Chart(metric_long)
-    .mark_bar()
-    .encode(
-        x=alt.X(
-            "Metric:N"
-        ),
-        y=alt.Y(
-            "Score:Q",
-            scale=alt.Scale(
-                domain=[0, 1]
-            ),
-        ),
-        color="Model:N",
-        tooltip=[
-            "Model",
-            "Metric",
-            alt.Tooltip(
-                "Score:Q",
-                format=".3f",
-            ),
-        ],
-    )
-    .properties(
-        height=420,
-    )
-)
+st.write(
+    f"""
+    **F1-score:** {best_f1_model["model"]} has the highest F1-score
+    at **{float(best_f1_model["f1_score"]):.2%}**, indicating the
+    strongest balance between precision and recall among the
+    evaluated models.
 
+    **ROC-AUC:** {best_auc_model["model"]} has the highest ROC-AUC
+    at **{float(best_auc_model["roc_auc"]):.2%}**, representing the
+    strongest ability to distinguish between successful and failed
+    migrations.
 
-st.altair_chart(
-    chart,
-    use_container_width=True,
+    **Accuracy:** {best_accuracy_model["model"]} has the highest
+    accuracy at **{float(best_accuracy_model["accuracy"]):.2%}**.
+    """
 )
 
 
 # ============================================================
-# Q7 — RANDOM FOREST
+# RANDOM FOREST FEATURE IMPORTANCE
 # ============================================================
 
 st.divider()
 
-st.header(
-    "7. Random Forest & Feature Importance"
-)
+st.header("Random Forest & Feature Importance")
 
 st.caption(
-    "Random Forest is treated as the primary analytical model, "
-    "but the final champion is selected using actual evaluation results."
+    "Random Forest feature importance is used to identify the "
+    "most influential predictive drivers of migration success."
 )
 
 
@@ -238,9 +243,7 @@ if rf_importance.empty:
 
 else:
 
-    st.subheader(
-        "Top predictive drivers"
-    )
+    st.subheader("📊 Top Predictive Drivers")
 
     top = (
         rf_importance
@@ -255,15 +258,18 @@ else:
         alt.Chart(top)
         .mark_bar()
         .encode(
+
             x=alt.X(
                 "importance:Q",
-                title="Feature importance",
+                title="Feature Importance",
             ),
+
             y=alt.Y(
                 "feature:N",
                 sort=None,
                 title=None,
             ),
+
             tooltip=[
                 "feature",
                 alt.Tooltip(
@@ -280,14 +286,16 @@ else:
 
     st.altair_chart(
         chart,
-        use_container_width=True,
+        width="stretch",
     )
 
+
+    st.subheader("Feature Importance Table")
 
     st.dataframe(
         rf_importance,
         hide_index=True,
-        use_container_width=True,
+        width="stretch",
     )
 
 
@@ -297,58 +305,179 @@ else:
 
 st.divider()
 
-st.subheader(
-    "Confusion matrix"
+st.subheader("🔢 Confusion Matrix")
+
+st.caption(
+    "The confusion matrix below is displayed as percentages "
+    "of the actual class rather than raw record counts."
 )
 
 
-selected_model = st.selectbox(
-    "Select model",
-    list(evaluation.keys()),
-)
+if evaluation:
 
-
-if selected_model in evaluation:
-
-    result = evaluation[
-        selected_model
-    ]
-
-    y_true = pd.Series(
-        result["y_true"]
-    )
-
-    y_pred = pd.Series(
-        result["y_pred"]
+    selected_model = st.selectbox(
+        "Select model",
+        list(evaluation.keys()),
     )
 
 
-    matrix = pd.crosstab(
-        y_true,
-        y_pred,
-    )
+    if selected_model in evaluation:
 
-    matrix.index.name = "Actual"
-    matrix.columns.name = "Predicted"
+        result = evaluation[
+            selected_model
+        ]
+
+        y_true = pd.Series(
+            result["y_true"]
+        )
+
+        y_pred = pd.Series(
+            result["y_pred"]
+        )
 
 
-    st.dataframe(
-        matrix,
-        use_container_width=True,
+        # ----------------------------------------------------
+        # Raw confusion matrix
+        # ----------------------------------------------------
+
+        matrix = pd.crosstab(
+            y_true,
+            y_pred,
+            dropna=False,
+        )
+
+
+        # Ensure both classes always exist
+        matrix = matrix.reindex(
+            index=[0, 1],
+            columns=[0, 1],
+            fill_value=0,
+        )
+
+
+        # ----------------------------------------------------
+        # Convert each actual class row to percentage
+        # ----------------------------------------------------
+
+        percentage_matrix = (
+            matrix.div(
+                matrix.sum(axis=1),
+                axis=0,
+            ) * 100
+        )
+
+
+        percentage_matrix.index = [
+            "Failed (0)",
+            "Successful (1)",
+        ]
+
+        percentage_matrix.columns = [
+            "Predicted Failed (0)",
+            "Predicted Successful (1)",
+        ]
+
+
+        st.dataframe(
+            percentage_matrix.round(2),
+            width="stretch",
+        )
+
+
+        # ----------------------------------------------------
+        # Interpretation
+        # ----------------------------------------------------
+
+        failed_correct = percentage_matrix.loc[
+            "Failed (0)",
+            "Predicted Failed (0)",
+        ]
+
+        failed_wrong = percentage_matrix.loc[
+            "Failed (0)",
+            "Predicted Successful (1)",
+        ]
+
+        success_correct = percentage_matrix.loc[
+            "Successful (1)",
+            "Predicted Successful (1)",
+        ]
+
+        success_wrong = percentage_matrix.loc[
+            "Successful (1)",
+            "Predicted Failed (0)",
+        ]
+
+
+        col1, col2 = st.columns(2)
+
+
+        with col1:
+
+            st.markdown(
+                f"""
+                **Failed migrations**
+
+                - Correctly predicted as failed:
+                  **{failed_correct:.2f}%**
+                - Incorrectly predicted as successful:
+                  **{failed_wrong:.2f}%**
+                """
+            )
+
+
+        with col2:
+
+            st.markdown(
+                f"""
+                **Successful migrations**
+
+                - Correctly predicted as successful:
+                  **{success_correct:.2f}%**
+                - Incorrectly predicted as failed:
+                  **{success_wrong:.2f}%**
+                """
+            )
+
+
+else:
+
+    st.info(
+        "Confusion matrix information is not available yet."
     )
 
 
 # ============================================================
-# INTERPRETATION
+# FINAL INTERPRETATION
 # ============================================================
+
+st.divider()
+
+st.subheader("📝 Overall Interpretation")
 
 st.info(
     """
-    **Interpretation:** A model with higher ROC-AUC generally provides
-    stronger ranking ability across the two classes. F1-score balances
-    precision and recall and is useful when both successful and failed
-    migrations matter. No model is selected solely because it has the
-    highest accuracy.
+    Model performance should be interpreted using multiple metrics
+    rather than accuracy alone.
+
+    **Accuracy** represents the overall proportion of correctly
+    classified migrations.
+
+    **Precision** indicates how reliable the model's positive
+    migration predictions are.
+
+    **Recall** indicates how effectively the model identifies
+    successful migrations.
+
+    **F1-score** provides a balance between precision and recall.
+
+    **ROC-AUC** measures how well the model separates successful
+    and failed migration outcomes across different classification
+    thresholds.
+
+    Feature importance represents predictive association within
+    the dataset and should not be interpreted as proof of biological
+    causation.
     """,
     icon=":material/info:",
 )

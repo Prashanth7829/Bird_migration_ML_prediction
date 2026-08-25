@@ -2,25 +2,14 @@
 
 import streamlit as st
 
-
 st.set_page_config(
     page_title="Bird Migration Success Prediction",
     page_icon="🦅",
     layout="wide",
-    initial_sidebar_state="expanded",
 )
 
-
-st.session_state.setdefault(
-    "selected_model_key",
-    None,
-)
-
-st.session_state.setdefault(
-    "single_prediction",
-    None,
-)
-
+st.session_state.setdefault("selected_model_key", None)
+st.session_state.setdefault("single_prediction", None)
 
 page = st.navigation(
     {
@@ -28,27 +17,22 @@ page = st.navigation(
             st.Page(
                 "app_pages/home.py",
                 title="Home",
-                icon="🏠",
+                icon=":material/home:",
             ),
             st.Page(
                 "app_pages/predict_compare.py",
                 title="Predict & Compare",
-                icon="🤖",
-            ),
-            st.Page(
-                "app_pages/data_insights.py",
-                title="Data Insights",
-                icon="📊",
+                icon=":material/model_training:",
             ),
             st.Page(
                 "app_pages/model_performance.py",
                 title="Model Performance",
-                icon="📈",
+                icon=":material/monitoring:",
             ),
             st.Page(
                 "app_pages/about.py",
                 title="About Project",
-                icon="ℹ️",
+                icon=":material/info:",
             ),
         ]
     },

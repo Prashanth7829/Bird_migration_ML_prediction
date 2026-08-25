@@ -36,7 +36,7 @@ DATA_PATH = (
     PROJECT_ROOT
     / "data"
     / "processed"
-    / "Bird_Migration_Analysis.csv"
+    / "Bird_Migration_Analysis_Improved_Synthetic.csv"
 )
 
 MODELS_DIR = PROJECT_ROOT / "models"

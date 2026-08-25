@@ -1,662 +1,332 @@
 {
   "logistic_regression": [
     {
-      "feature": "Migration_End_Month",
-      "importance": 0.180736
+      "feature": "categorical__Food_Supply_Level_Low",
+      "importance": 1.7476997656163784
     },
     {
-      "feature": "Habitat",
-      "importance": 0.176975
+      "feature": "categorical__Weather_Condition_Stormy",
+      "importance": 1.4916930037792155
     },
     {
-      "feature": "Migration_Reason",
-      "importance": 0.165258
+      "feature": "categorical__Weather_Condition_Clear",
+      "importance": 1.4531865762525655
     },
     {
-      "feature": "Region",
-      "importance": 0.138375
+      "feature": "categorical__Food_Supply_Level_High",
+      "importance": 1.4135897316889638
     },
     {
-      "feature": "Species",
-      "importance": 0.123805
+      "feature": "categorical__Weather_Condition_Cloudy",
+      "importance": 0.6792294382636883
     },
     {
-      "feature": "Food_Supply_Level",
-      "importance": 0.072598
+      "feature": "categorical__Weather_Condition_Windy",
+      "importance": 0.4960701156146657
     },
     {
-      "feature": "Migration_Start_Month",
-      "importance": 0.063953
+      "feature": "categorical__Migration_Reason_Breeding",
+      "importance": 0.48965840547583744
     },
     {
-      "feature": "Rest_Stops",
-      "importance": 0.059505
+      "feature": "categorical__Migration_Reason_Shelter",
+      "importance": 0.4028104349288057
     },
     {
-      "feature": "Weather_Condition",
-      "importance": 0.04051
+      "feature": "numeric__Visibility_km",
+      "importance": 0.3871135611823936
     },
     {
-      "feature": "Min_Altitude_m",
-      "importance": 0.036762
+      "feature": "categorical__Migration_Start_Month_1",
+      "importance": 0.3821487249772326
     },
     {
-      "feature": "Max_Altitude_m",
-      "importance": 0.031111
+      "feature": "categorical__Migrated_in_Flock_No",
+      "importance": 0.3759650867212728
     },
     {
-      "feature": "Humidity_%",
-      "importance": 0.024168
+      "feature": "categorical__Migration_Reason_Climate",
+      "importance": 0.3457097446129407
     },
     {
-      "feature": "Flight_Distance_km",
-      "importance": 0.021427
+      "feature": "categorical__Migration_Start_Month_7",
+      "importance": 0.3252993215853472
     },
     {
-      "feature": "Predator_Sightings",
-      "importance": 0.018178
+      "feature": "numeric__Predator_Sightings",
+      "importance": 0.310244625114074
     },
     {
-      "feature": "Wind_Speed_kmph",
-      "importance": 0.010239
+      "feature": "categorical__Weather_Condition_Rainy",
+      "importance": 0.3054824772478213
     },
     {
-      "feature": "Start_Latitude",
-      "importance": 0.009685
+      "feature": "categorical__Migration_Start_Month_6",
+      "importance": 0.303011555732589
     },
     {
-      "feature": "End_Latitude",
-      "importance": 0.008647
+      "feature": "categorical__Migration_Start_Month_4",
+      "importance": 0.302348223837592
     },
     {
-      "feature": "Flight_Duration_hours",
-      "importance": 0.008382
+      "feature": "categorical__Migration_Start_Month_3",
+      "importance": 0.29980990354494363
     },
     {
-      "feature": "Start_Longitude",
-      "importance": 0.00732
+      "feature": "numeric__Wind_Speed_kmph",
+      "importance": 0.27156712749984946
     },
     {
-      "feature": "Pressure_hPa",
-      "importance": 0.006848
-    },
-    {
-      "feature": "End_Longitude",
-      "importance": 0.005806
-    },
-    {
-      "feature": "Flock_Size",
-      "importance": 0.000649
-    },
-    {
-      "feature": "Temperature_C",
-      "importance": 0.0
-    },
-    {
-      "feature": "Visibility_km",
-      "importance": 0.0
-    },
-    {
-      "feature": "Average_Speed_kmph",
-      "importance": 0.0
-    },
-    {
-      "feature": "Origin",
-      "importance": 0.0
-    },
-    {
-      "feature": "Migrated_in_Flock",
-      "importance": 0.0
+      "feature": "numeric__Max_Altitude_m",
+      "importance": 0.26510052951105617
     }
   ],
   "decision_tree": [
     {
-      "feature": "Pressure_hPa",
-      "importance": 0.073551
+      "feature": "numeric__Temperature_C",
+      "importance": 0.337558294626851
     },
     {
-      "feature": "Max_Altitude_m",
-      "importance": 0.069324
+      "feature": "categorical__Food_Supply_Level_Low",
+      "importance": 0.22064783593490472
     },
     {
-      "feature": "Flight_Distance_km",
-      "importance": 0.067662
+      "feature": "categorical__Weather_Condition_Clear",
+      "importance": 0.13691651608196492
     },
     {
-      "feature": "Flock_Size",
-      "importance": 0.06235
+      "feature": "categorical__Food_Supply_Level_Medium",
+      "importance": 0.0695853117884122
     },
     {
-      "feature": "Wind_Speed_kmph",
-      "importance": 0.060294
+      "feature": "categorical__Weather_Condition_Cloudy",
+      "importance": 0.06124738607852766
     },
     {
-      "feature": "Average_Speed_kmph",
-      "importance": 0.060003
+      "feature": "numeric__Visibility_km",
+      "importance": 0.03954811789595971
     },
     {
-      "feature": "Temperature_C",
-      "importance": 0.057421
+      "feature": "numeric__Wind_Speed_kmph",
+      "importance": 0.02065174350246795
     },
     {
-      "feature": "End_Longitude",
-      "importance": 0.056351
+      "feature": "categorical__Weather_Condition_Stormy",
+      "importance": 0.01887246120468123
     },
     {
-      "feature": "Humidity_%",
-      "importance": 0.050304
+      "feature": "categorical__Food_Supply_Level_High",
+      "importance": 0.016974839164324077
     },
     {
-      "feature": "Flight_Duration_hours",
-      "importance": 0.047748
+      "feature": "numeric__Predator_Sightings",
+      "importance": 0.015762042027282736
     },
     {
-      "feature": "Start_Latitude",
-      "importance": 0.047208
+      "feature": "numeric__Flock_Size",
+      "importance": 0.01329491243649295
     },
     {
-      "feature": "End_Latitude",
-      "importance": 0.047201
+      "feature": "numeric__Average_Speed_kmph",
+      "importance": 0.011195911934348891
     },
     {
-      "feature": "Visibility_km",
-      "importance": 0.04558
+      "feature": "numeric__Max_Altitude_m",
+      "importance": 0.009195760471015462
     },
     {
-      "feature": "Min_Altitude_m",
-      "importance": 0.041246
+      "feature": "categorical__Migration_Reason_Breeding",
+      "importance": 0.005262136584326029
     },
     {
-      "feature": "Start_Longitude",
-      "importance": 0.035767
+      "feature": "numeric__Flight_Duration_hours",
+      "importance": 0.005217420632654964
     },
     {
-      "feature": "Rest_Stops",
-      "importance": 0.031388
+      "feature": "numeric__Start_Latitude",
+      "importance": 0.004179773277418448
     },
     {
-      "feature": "Predator_Sightings",
-      "importance": 0.02894
+      "feature": "categorical__Weather_Condition_Rainy",
+      "importance": 0.00365560195527535
     },
     {
-      "feature": "Habitat",
-      "importance": 0.021748
+      "feature": "numeric__Flight_Distance_km",
+      "importance": 0.003652059465695225
     },
     {
-      "feature": "Food_Supply_Level",
-      "importance": 0.019911
+      "feature": "numeric__End_Latitude",
+      "importance": 0.0017599015934345258
     },
     {
-      "feature": "Migration_Reason",
-      "importance": 0.016258
-    },
-    {
-      "feature": "Migrated_in_Flock",
-      "importance": 0.013641
-    },
-    {
-      "feature": "Region",
-      "importance": 0.011231
-    },
-    {
-      "feature": "Migration_Start_Month",
-      "importance": 0.010627
-    },
-    {
-      "feature": "Migration_End_Month",
-      "importance": 0.010165
-    },
-    {
-      "feature": "Species",
-      "importance": 0.008443
-    },
-    {
-      "feature": "Weather_Condition",
-      "importance": 0.005638
-    },
-    {
-      "feature": "Origin",
-      "importance": 0.0
+      "feature": "categorical__Origin_Northern",
+      "importance": 0.001594514289326095
     }
   ],
-  "knn": [
-    {
-      "feature": "Weather_Condition",
-      "importance": 0.025578
-    },
-    {
-      "feature": "Migrated_in_Flock",
-      "importance": 0.024553
-    },
-    {
-      "feature": "Average_Speed_kmph",
-      "importance": 0.008673
-    },
-    {
-      "feature": "Max_Altitude_m",
-      "importance": 0.002451
-    },
-    {
-      "feature": "Migration_Reason",
-      "importance": 0.00233
-    },
-    {
-      "feature": "Start_Longitude",
-      "importance": 0.001914
-    },
-    {
-      "feature": "Species",
-      "importance": 0.0
-    },
-    {
-      "feature": "Region",
-      "importance": 0.0
-    },
-    {
-      "feature": "Habitat",
-      "importance": 0.0
-    },
-    {
-      "feature": "Origin",
-      "importance": 0.0
-    },
-    {
-      "feature": "Food_Supply_Level",
-      "importance": 0.0
-    },
-    {
-      "feature": "Migration_Start_Month",
-      "importance": 0.0
-    },
-    {
-      "feature": "Migration_End_Month",
-      "importance": 0.0
-    },
-    {
-      "feature": "Start_Latitude",
-      "importance": 0.0
-    },
-    {
-      "feature": "End_Latitude",
-      "importance": 0.0
-    },
-    {
-      "feature": "End_Longitude",
-      "importance": 0.0
-    },
-    {
-      "feature": "Temperature_C",
-      "importance": 0.0
-    },
-    {
-      "feature": "Wind_Speed_kmph",
-      "importance": 0.0
-    },
-    {
-      "feature": "Humidity_%",
-      "importance": 0.0
-    },
-    {
-      "feature": "Pressure_hPa",
-      "importance": 0.0
-    },
-    {
-      "feature": "Visibility_km",
-      "importance": 0.0
-    },
-    {
-      "feature": "Flight_Distance_km",
-      "importance": 0.0
-    },
-    {
-      "feature": "Flight_Duration_hours",
-      "importance": 0.0
-    },
-    {
-      "feature": "Min_Altitude_m",
-      "importance": 0.0
-    },
-    {
-      "feature": "Rest_Stops",
-      "importance": 0.0
-    },
-    {
-      "feature": "Predator_Sightings",
-      "importance": 0.0
-    },
-    {
-      "feature": "Flock_Size",
-      "importance": 0.0
-    }
-  ],
-  "svm": [
-    {
-      "feature": "Min_Altitude_m",
-      "importance": 0.01017
-    },
-    {
-      "feature": "Flight_Distance_km",
-      "importance": 0.007928
-    },
-    {
-      "feature": "Visibility_km",
-      "importance": 0.007279
-    },
-    {
-      "feature": "Pressure_hPa",
-      "importance": 0.006887
-    },
-    {
-      "feature": "Migrated_in_Flock",
-      "importance": 0.005125
-    },
-    {
-      "feature": "Flock_Size",
-      "importance": 0.00378
-    },
-    {
-      "feature": "Region",
-      "importance": 0.002499
-    },
-    {
-      "feature": "Migration_Start_Month",
-      "importance": 0.002034
-    },
-    {
-      "feature": "Flight_Duration_hours",
-      "importance": 0.00177
-    },
-    {
-      "feature": "End_Latitude",
-      "importance": 0.000513
-    },
-    {
-      "feature": "Start_Latitude",
-      "importance": 0.000304
-    },
-    {
-      "feature": "Species",
-      "importance": 0.0
-    },
-    {
-      "feature": "Habitat",
-      "importance": 0.0
-    },
-    {
-      "feature": "Origin",
-      "importance": 0.0
-    },
-    {
-      "feature": "Migration_Reason",
-      "importance": 0.0
-    },
-    {
-      "feature": "Weather_Condition",
-      "importance": 0.0
-    },
-    {
-      "feature": "Food_Supply_Level",
-      "importance": 0.0
-    },
-    {
-      "feature": "Migration_End_Month",
-      "importance": 0.0
-    },
-    {
-      "feature": "Start_Longitude",
-      "importance": 0.0
-    },
-    {
-      "feature": "End_Longitude",
-      "importance": 0.0
-    },
-    {
-      "feature": "Temperature_C",
-      "importance": 0.0
-    },
-    {
-      "feature": "Wind_Speed_kmph",
-      "importance": 0.0
-    },
-    {
-      "feature": "Humidity_%",
-      "importance": 0.0
-    },
-    {
-      "feature": "Average_Speed_kmph",
-      "importance": 0.0
-    },
-    {
-      "feature": "Max_Altitude_m",
-      "importance": 0.0
-    },
-    {
-      "feature": "Rest_Stops",
-      "importance": 0.0
-    },
-    {
-      "feature": "Predator_Sightings",
-      "importance": 0.0
-    }
-  ],
+  "knn": [],
+  "svm": [],
   "gradient_boosting": [
     {
-      "feature": "Humidity_%",
-      "importance": 0.125258
+      "feature": "numeric__Temperature_C",
+      "importance": 0.2681479801544716
     },
     {
-      "feature": "Max_Altitude_m",
-      "importance": 0.100401
+      "feature": "categorical__Food_Supply_Level_Low",
+      "importance": 0.1650020066396959
     },
     {
-      "feature": "Flight_Distance_km",
-      "importance": 0.097217
+      "feature": "categorical__Weather_Condition_Clear",
+      "importance": 0.10136858895835746
     },
     {
-      "feature": "Rest_Stops",
-      "importance": 0.094984
+      "feature": "categorical__Food_Supply_Level_High",
+      "importance": 0.08137702329357842
     },
     {
-      "feature": "Flock_Size",
-      "importance": 0.092687
+      "feature": "numeric__Visibility_km",
+      "importance": 0.04821474484002968
     },
     {
-      "feature": "Habitat",
-      "importance": 0.07208
+      "feature": "categorical__Weather_Condition_Cloudy",
+      "importance": 0.04005530417540001
     },
     {
-      "feature": "Migration_Reason",
-      "importance": 0.064679
+      "feature": "numeric__Wind_Speed_kmph",
+      "importance": 0.036548380931098134
     },
     {
-      "feature": "Wind_Speed_kmph",
-      "importance": 0.06296
+      "feature": "categorical__Weather_Condition_Stormy",
+      "importance": 0.03027239760435846
     },
     {
-      "feature": "Temperature_C",
-      "importance": 0.061389
+      "feature": "numeric__Predator_Sightings",
+      "importance": 0.024936091908245205
     },
     {
-      "feature": "End_Latitude",
-      "importance": 0.040857
+      "feature": "numeric__Flock_Size",
+      "importance": 0.02384111392846845
     },
     {
-      "feature": "Region",
-      "importance": 0.03736
+      "feature": "numeric__Average_Speed_kmph",
+      "importance": 0.02148522641723515
     },
     {
-      "feature": "Pressure_hPa",
-      "importance": 0.02979
+      "feature": "numeric__Max_Altitude_m",
+      "importance": 0.017698585738658092
     },
     {
-      "feature": "Min_Altitude_m",
-      "importance": 0.029541
+      "feature": "numeric__Start_Latitude",
+      "importance": 0.013343800700350796
     },
     {
-      "feature": "Start_Latitude",
-      "importance": 0.027339
+      "feature": "categorical__Migration_Reason_Breeding",
+      "importance": 0.012283070869722605
     },
     {
-      "feature": "End_Longitude",
-      "importance": 0.019658
+      "feature": "numeric__Flight_Duration_hours",
+      "importance": 0.011752224454894608
     },
     {
-      "feature": "Visibility_km",
-      "importance": 0.0151
+      "feature": "numeric__Flight_Distance_km",
+      "importance": 0.011231551611442831
     },
     {
-      "feature": "Start_Longitude",
-      "importance": 0.011095
+      "feature": "numeric__Humidity_%",
+      "importance": 0.008020876295427002
     },
     {
-      "feature": "Migration_End_Month",
-      "importance": 0.009492
+      "feature": "numeric__Start_Longitude",
+      "importance": 0.00786905408987778
     },
     {
-      "feature": "Flight_Duration_hours",
-      "importance": 0.008114
+      "feature": "numeric__End_Longitude",
+      "importance": 0.007406128950278343
     },
     {
-      "feature": "Average_Speed_kmph",
-      "importance": 0.0
-    },
-    {
-      "feature": "Predator_Sightings",
-      "importance": 0.0
-    },
-    {
-      "feature": "Species",
-      "importance": 0.0
-    },
-    {
-      "feature": "Origin",
-      "importance": 0.0
-    },
-    {
-      "feature": "Weather_Condition",
-      "importance": 0.0
-    },
-    {
-      "feature": "Migrated_in_Flock",
-      "importance": 0.0
-    },
-    {
-      "feature": "Food_Supply_Level",
-      "importance": 0.0
-    },
-    {
-      "feature": "Migration_Start_Month",
-      "importance": 0.0
+      "feature": "numeric__Min_Altitude_m",
+      "importance": 0.007026506922841261
     }
   ],
   "random_forest": [
     {
-      "feature": "Species",
-      "importance": 0.357143
+      "feature": "numeric__Temperature_C",
+      "importance": 0.11764658448457625
     },
     {
-      "feature": "Weather_Condition",
-      "importance": 0.142857
+      "feature": "categorical__Food_Supply_Level_Low",
+      "importance": 0.08321002422564189
     },
     {
-      "feature": "Habitat",
-      "importance": 0.102464
+      "feature": "categorical__Food_Supply_Level_High",
+      "importance": 0.05669479146991074
     },
     {
-      "feature": "Predator_Sightings",
-      "importance": 0.071429
+      "feature": "categorical__Weather_Condition_Clear",
+      "importance": 0.046904666117362825
     },
     {
-      "feature": "Region",
-      "importance": 0.071429
+      "feature": "numeric__Visibility_km",
+      "importance": 0.04353911184526521
     },
     {
-      "feature": "Migration_Reason",
-      "importance": 0.071429
+      "feature": "numeric__Wind_Speed_kmph",
+      "importance": 0.03772710487695188
     },
     {
-      "feature": "Migration_End_Month",
-      "importance": 0.071429
+      "feature": "numeric__Average_Speed_kmph",
+      "importance": 0.032613023669301425
     },
     {
-      "feature": "Flight_Duration_hours",
-      "importance": 0.063308
+      "feature": "numeric__Flight_Duration_hours",
+      "importance": 0.03217036760994359
     },
     {
-      "feature": "End_Longitude",
-      "importance": 0.040393
+      "feature": "numeric__Max_Altitude_m",
+      "importance": 0.030370663764244098
     },
     {
-      "feature": "Flight_Distance_km",
-      "importance": 0.008121
+      "feature": "numeric__Flight_Distance_km",
+      "importance": 0.02906752159518451
     },
     {
-      "feature": "Start_Latitude",
-      "importance": 0.0
+      "feature": "numeric__Min_Altitude_m",
+      "importance": 0.028558592961251503
     },
     {
-      "feature": "Start_Longitude",
-      "importance": 0.0
+      "feature": "numeric__Humidity_%",
+      "importance": 0.02851455640687584
     },
     {
-      "feature": "End_Latitude",
-      "importance": 0.0
+      "feature": "numeric__End_Latitude",
+      "importance": 0.027965046035415053
     },
     {
-      "feature": "Temperature_C",
-      "importance": 0.0
+      "feature": "numeric__Start_Latitude",
+      "importance": 0.027928145302885267
     },
     {
-      "feature": "Wind_Speed_kmph",
-      "importance": 0.0
+      "feature": "numeric__End_Longitude",
+      "importance": 0.02791641620311471
     },
     {
-      "feature": "Humidity_%",
-      "importance": 0.0
+      "feature": "numeric__Start_Longitude",
+      "importance": 0.027347728119315767
     },
     {
-      "feature": "Pressure_hPa",
-      "importance": 0.0
+      "feature": "numeric__Pressure_hPa",
+      "importance": 0.027096113076391877
     },
     {
-      "feature": "Visibility_km",
-      "importance": 0.0
+      "feature": "categorical__Weather_Condition_Stormy",
+      "importance": 0.023932241316450366
     },
     {
-      "feature": "Average_Speed_kmph",
-      "importance": 0.0
+      "feature": "categorical__Food_Supply_Level_Medium",
+      "importance": 0.0228994226681851
     },
     {
-      "feature": "Max_Altitude_m",
-      "importance": 0.0
-    },
-    {
-      "feature": "Min_Altitude_m",
-      "importance": 0.0
-    },
-    {
-      "feature": "Rest_Stops",
-      "importance": 0.0
-    },
-    {
-      "feature": "Flock_Size",
-      "importance": 0.0
-    },
-    {
-      "feature": "Origin",
-      "importance": 0.0
-    },
-    {
-      "feature": "Migrated_in_Flock",
-      "importance": 0.0
-    },
-    {
-      "feature": "Food_Supply_Level",
-      "importance": 0.0
-    },
-    {
-      "feature": "Migration_Start_Month",
-      "importance": 0.0
+      "feature": "numeric__Flock_Size",
+      "importance": 0.021961717358125174
     }
   ]
 }

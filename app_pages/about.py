@@ -1,4 +1,4 @@
-"""About page for the Bird Migration Success Prediction project."""
+"""About page for the Bird Migration Analytics project."""
 
 import streamlit as st
 
@@ -28,11 +28,20 @@ metrics = load_metrics()
 # PAGE TITLE
 # ============================================================
 
-st.title("About the Project")
+st.title("ℹ️ About the Project")
 
 st.caption(
     "Bird Migration Analytics – Predicting Migration Success"
 )
+
+st.write(
+    "An end-to-end machine learning project for analysing "
+    "bird migration patterns, predicting migration outcomes, "
+    "and identifying important environmental, geographical, "
+    "flight, behavioural, and biological factors."
+)
+
+st.divider()
 
 
 # ============================================================
@@ -41,17 +50,22 @@ st.caption(
 
 with st.container(border=True):
 
-    st.subheader("🦅 Bird Migration Success Prediction")
+    st.subheader("🦅 Bird Migration Analytics")
 
     st.write(
         """
-        This project uses machine learning to analyse bird migration
-        records and predict whether a migration journey is likely to be
-        successful or unsuccessful.
+        Bird Migration Analytics applies machine learning and
+        exploratory analysis to understand the conditions associated
+        with successful and unsuccessful bird migration journeys.
 
-        The analysis combines biological, geographical, environmental,
-        flight, behavioural, and temporal information to identify
-        important predictive factors associated with migration success.
+        The project combines multiple dimensions of migration data,
+        including species, geography, environmental conditions,
+        migration motivation, flight characteristics, behavioural
+        patterns, and seasonal information.
+
+        The resulting system provides both predictive capabilities
+        and analytical insights through an interactive Streamlit
+        dashboard.
         """
     )
 
@@ -62,35 +76,45 @@ with st.container(border=True):
 
 st.subheader("🎯 Project Objectives")
 
-col1, col2 = st.columns(2)
+objective_col1, objective_col2 = st.columns(2)
 
-with col1:
+with objective_col1:
 
-    st.markdown(
-        """
-        **Data Analysis**
+    with st.container(border=True):
 
-        - Analyse bird migration patterns
-        - Study environmental conditions
-        - Compare species and regions
-        - Analyse flight characteristics
-        - Investigate behavioural factors
-        """
-    )
+        st.markdown("### 🔎 Data & Migration Analysis")
 
-with col2:
+        st.markdown(
+            """
+            - Analyse migration patterns across species
+            - Explore regional and habitat differences
+            - Study seasonal migration behaviour
+            - Investigate environmental conditions
+            - Analyse flight characteristics
+            - Examine behavioural factors
+            """
+        )
 
-    st.markdown(
-        """
-        **Machine Learning**
 
-        - Predict migration success
-        - Compare six classification models
-        - Identify important predictive features
-        - Evaluate model performance
-        - Support migration-risk analysis
-        """
-    )
+with objective_col2:
+
+    with st.container(border=True):
+
+        st.markdown("### 🤖 Machine Learning")
+
+        st.markdown(
+            """
+            - Predict migration success or failure
+            - Compare multiple classification algorithms
+            - Evaluate predictive performance
+            - Identify important predictive drivers
+            - Support individual migration predictions
+            - Provide interpretable model insights
+            """
+        )
+
+
+st.divider()
 
 
 # ============================================================
@@ -99,44 +123,32 @@ with col2:
 
 st.subheader("📊 Dataset Summary")
 
-successful = int(
-    (data[TARGET_COLUMN] == 1).sum()
+st.write(
+    "The project is built using the processed bird migration "
+    "dataset supplied for the case study."
 )
 
-failed = int(
-    (data[TARGET_COLUMN] == 0).sum()
-)
+dataset_col1, dataset_col2, dataset_col3 = st.columns(3)
 
-success_rate = (
-    successful / len(data)
-    if len(data) > 0
-    else 0
-)
+with dataset_col1:
 
-c1, c2, c3, c4 = st.columns(4)
-
-with c1:
     st.metric(
-        "Migration Records",
+        "🗃️ Migration Records",
         f"{len(data):,}",
     )
 
-with c2:
+with dataset_col2:
+
     st.metric(
-        "Successful",
-        f"{successful:,}",
+        "🐦 Species",
+        data["Species"].nunique(),
     )
 
-with c3:
-    st.metric(
-        "Failed",
-        f"{failed:,}",
-    )
+with dataset_col3:
 
-with c4:
     st.metric(
-        "Success Rate",
-        f"{success_rate:.1%}",
+        "🗺️ Regions",
+        data["Region"].nunique(),
     )
 
 
@@ -147,39 +159,51 @@ with c4:
 st.subheader("🔍 Machine Learning Features")
 
 st.write(
-    "The predictive model uses selected features that represent "
-    "information available before or during migration."
+    "The predictive model uses selected variables representing "
+    "information that can reasonably be available before or "
+    "during a migration journey."
 )
 
 feature_col1, feature_col2 = st.columns(2)
 
 with feature_col1:
 
-    st.markdown("### Categorical Features")
+    with st.container(border=True):
 
-    for feature in CATEGORICAL_FEATURES:
-        st.write(f"• {feature}")
+        st.markdown("### Categorical Features")
+
+        for feature in CATEGORICAL_FEATURES:
+
+            st.write(
+                f"• {feature.replace('_', ' ')}"
+            )
+
 
 with feature_col2:
 
-    st.markdown("### Numerical Features")
+    with st.container(border=True):
 
-    for feature in NUMERIC_FEATURES:
-        st.write(f"• {feature}")
+        st.markdown("### Numerical Features")
+
+        for feature in NUMERIC_FEATURES:
+
+            st.write(
+                f"• {feature.replace('_', ' ')}"
+            )
 
 
 # ============================================================
-# FEATURE COUNT
+# FEATURE SELECTION
 # ============================================================
 
 with st.container(border=True):
 
-    st.subheader("Feature Selection")
+    st.subheader("🧩 Feature Selection")
 
     st.write(
         f"""
-        The final predictive model uses **{len(FEATURE_COLUMNS)} selected
-        predictor variables**.
+        The final predictive model uses **{len(FEATURE_COLUMNS)}
+        selected predictor variables**.
 
         The target variable is:
 
@@ -192,17 +216,25 @@ with st.container(border=True):
         """
     )
 
+    st.caption(
+        "Post-outcome variables and potential leakage variables "
+        "are excluded from the primary predictive feature set."
+    )
+
+
+st.divider()
+
 
 # ============================================================
-# MODEL COMPARISON
+# MACHINE LEARNING MODELS
 # ============================================================
 
 st.subheader("🤖 Machine Learning Models")
 
 st.write(
     """
-    Six classification algorithms are trained and evaluated using the
-    same train/test split.
+    Six classification algorithms are trained and evaluated
+    using the same modelling workflow and held-out test data.
     """
 )
 
@@ -215,43 +247,64 @@ models = [
     "Random Forest",
 ]
 
-for model in models:
-    st.write(f"• {model}")
+model_col1, model_col2 = st.columns(2)
+
+for index, model in enumerate(models):
+
+    target_col = (
+        model_col1
+        if index % 2 == 0
+        else model_col2
+    )
+
+    with target_col:
+
+        st.write(
+            f"**{index + 1}.** {model}"
+        )
+
+
+st.divider()
 
 
 # ============================================================
-# BEST MODEL
+# CURRENT MODEL PERFORMANCE
 # ============================================================
+
+st.subheader("🏆 Current Model Performance")
 
 if not metrics.empty:
 
-    st.subheader("🏆 Current Model Performance")
-
     champion = metrics.iloc[0]
 
-    c1, c2, c3 = st.columns(3)
+    performance_col1, performance_col2, performance_col3 = (
+        st.columns(3)
+    )
 
-    with c1:
+    with performance_col1:
+
         st.metric(
             "Best Model",
             str(champion["model"]),
         )
 
-    with c2:
+    with performance_col2:
+
         st.metric(
             "F1 Score",
             f"{float(champion['f1_score']):.3f}",
         )
 
-    with c3:
+    with performance_col3:
+
         st.metric(
             "ROC-AUC",
             f"{float(champion['roc_auc']):.3f}",
         )
 
     st.caption(
-        "The best model is selected from the actual validation results "
-        "rather than assuming Random Forest will always perform best."
+        "Performance values are calculated from the trained "
+        "model evaluation results."
     )
 
 else:
@@ -262,26 +315,40 @@ else:
     )
 
 
+st.divider()
+
+
 # ============================================================
-# LEAKAGE AWARENESS
+# DATA LEAKAGE AWARENESS
 # ============================================================
 
 st.subheader("🛡️ Data Leakage Consideration")
 
-st.write(
-    """
-    The project follows a leakage-aware modelling approach.
+with st.container(border=True):
 
-    Variables that may only become available after a migration outcome
-    is known should not be used as primary prediction features.
+    st.write(
+        """
+        A leakage-aware modelling approach is followed throughout
+        the project.
 
-    Examples include migration interruption information, recovery
-    information, nesting outcomes, and other post-outcome indicators.
+        Variables that may only become available after the migration
+        outcome is known should not be used as primary prediction
+        features.
 
-    This helps ensure that the model learns from information that could
-    realistically be available when predicting migration success.
-    """
-)
+        Examples include:
+
+        - Migration interruption information
+        - Interruption reasons
+        - Recovery information
+        - Recovery time
+        - Nesting outcomes
+        - Other post-outcome indicators
+
+        Excluding these variables helps ensure that the model learns
+        from information that could realistically be available when
+        estimating migration success.
+        """
+    )
 
 
 # ============================================================
@@ -293,37 +360,25 @@ st.subheader("📚 Research Questions")
 questions = [
     "What are the key trends in bird migration behaviour across species, regions, habitats, and seasons?",
     "How do environmental factors influence migration success?",
-    "What are the main reasons for bird migration and how do they vary?",
+    "What are the main reasons for bird migration and how do they vary across species and regions?",
     "How do flight characteristics affect migration success?",
     "How do behavioural factors influence migration outcomes?",
     "Which features have the greatest influence on migration success?",
-    "How does Random Forest compare with the other machine learning models?",
+    "How does these models comparatively perform Random Forest, Logistic Regression, Decision Tree, KNN, SVM, and Gradient Boosting, and which model provides the most effective prediction of bird migration success?"
 ]
 
-for number, question in enumerate(questions, start=1):
-    st.markdown(f"**RQ{number}.** {question}")
+for number, question in enumerate(
+    questions,
+    start=1,
+):
 
-
-# ============================================================
-# DISCLAIMER
-# ============================================================
-
-with st.container(border=True):
-
-    st.subheader("⚠️ Interpretation")
-
-    st.write(
-        """
-        Machine learning feature importance and predictions represent
-        predictive associations within the available dataset.
-
-        They should not be interpreted as proof of causation.
-
-        Therefore, the dashboard uses terms such as **predictive drivers**,
-        **important contributing factors**, and **factors associated with
-        migration success**.
-        """
+    st.markdown(
+        f"**RQ{number}.** {question}"
     )
+
+
+st.divider()
+
 
 
 # ============================================================
@@ -334,16 +389,24 @@ st.subheader("⚙️ Project Status")
 
 if metadata:
 
-    st.success("Model training artifacts are available.")
+    st.success(
+        "Model training artifacts are available.",
+        icon=":material/check_circle:",
+    )
 
-    if metadata.get("trained_at_utc"):
+    trained_at = metadata.get(
+        "trained_at_utc"
+    )
+
+    if trained_at:
+
         st.caption(
-            f"Last training time (UTC): "
-            f"{metadata['trained_at_utc']}"
+            f"Last training time (UTC): {trained_at}"
         )
 
 else:
 
     st.warning(
-        "Training metadata is not available yet."
+        "Training metadata is not available yet. "
+        "Run the training pipeline to generate model artifacts."
     )

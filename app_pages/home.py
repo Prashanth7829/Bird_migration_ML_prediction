@@ -24,248 +24,302 @@ feature_importance = load_feature_importance()
 # PAGE TITLE
 # ============================================================
 
-st.title("🦅 Bird Migration Success Prediction")
+st.title("🦅 Bird Migration Analytics")
 
 st.write(
-    "Predict, compare, and understand migration outcomes "
-    "using environmental, geographical, flight and behavioural data."
+    "A machine learning system designed to predict migration "
+    "success and explore the environmental, geographical, "
+    "flight, and behavioural factors associated with bird migration."
+)
+
+st.caption(
+    "MACHINE LEARNING  •  MIGRATION ANALYTICS  •  PREDICTIVE INSIGHTS"
 )
 
 st.divider()
 
 
 # ============================================================
-# KEY METRICS
+# DATASET OVERVIEW
 # ============================================================
 
+st.subheader("📊 Dataset Overview")
+
 total_records = len(data)
-
-successful = int(
-    data["Migration_Success_Num"].sum()
+species_names = sorted(
+    data["Species"].dropna().astype(str).unique().tolist()
+)
+region_names = sorted(
+    data["Region"].dropna().astype(str).unique().tolist()
 )
 
-failed = total_records - successful
-
-success_rate = (
-    successful / total_records
-    if total_records > 0
-    else 0
-)
-
-species_count = data["Species"].nunique()
-region_count = data["Region"].nunique()
-
-
-col1, col2, col3, col4, col5 = st.columns(5)
+col1, col2, col3 = st.columns(3)
 
 with col1:
     st.metric(
-        "Migration Records",
+        "🗃️ Migration Records",
         f"{total_records:,}",
     )
 
 with col2:
     st.metric(
-        "Successful",
-        f"{successful:,}",
+        "🐦 Species",
+        data["Species"].nunique(),
     )
 
 with col3:
     st.metric(
-        "Failed",
-        f"{failed:,}",
+        "🗺️ Regions",
+        data["Region"].nunique(),
     )
 
-with col4:
-    st.metric(
-        "Success Rate",
-        f"{success_rate:.1%}",
-    )
 
-with col5:
-    st.metric(
-        "Species / Regions",
-        f"{species_count} / {region_count}",
-    )
+# ============================================================
+# SPECIES AND REGION NAMES
+# ============================================================
+
+species_col, region_col = st.columns(2)
+
+with species_col:
+
+    with st.container(border=True):
+
+        st.markdown("### 🐦 Species Covered")
+
+        st.write(
+            "Bird species represented in the migration dataset:"
+        )
+
+        st.write(
+            " • ".join(species_names)
+        )
+
+
+with region_col:
+
+    with st.container(border=True):
+
+        st.markdown("### 🗺️ Regions Covered")
+
+        st.write(
+            "Geographic regions represented in the migration records:"
+        )
+
+        st.write(
+            " • ".join(region_names)
+        )
 
 
 st.divider()
 
 
 # ============================================================
-# MODEL STATUS
+# MODEL PERFORMANCE
 # ============================================================
 
-st.subheader("🏆 Model Status")
+st.subheader("🏆 Current Model Performance")
 
 if metrics.empty:
 
     st.warning(
-        "Models have not been trained yet."
+        "Models have not been trained yet. "
+        "Run `python -m src.train` to generate the model results."
     )
 
 else:
 
     champion = metrics.iloc[0]
 
-    col1, col2, col3 = st.columns(3)
+    model_col1, model_col2, model_col3 = st.columns(3)
 
-    with col1:
+    with model_col1:
+
         st.metric(
-            "Best Model",
-            champion["model"],
+            "Best Validation Model",
+            str(champion["model"]),
         )
 
-    with col2:
+    with model_col2:
+
         st.metric(
             "F1 Score",
-            f"{champion['f1_score']:.3f}",
+            f"{float(champion['f1_score']):.3f}",
         )
 
-    with col3:
+    with model_col3:
+
         st.metric(
             "ROC-AUC",
-            f"{champion['roc_auc']:.3f}",
+            f"{float(champion['roc_auc']):.3f}",
         )
 
     if metadata:
 
+        train_rows = metadata.get("train_rows")
+        test_rows = metadata.get("test_rows")
+
+        if train_rows is not None and test_rows is not None:
+
+            st.caption(
+                f"Training records: {int(train_rows):,} "
+                f"| Test records: {int(test_rows):,}"
+            )
+
+
+st.divider()
+
+
+# ============================================================
+# WEATHER ANALYSIS
+# ============================================================
+
+weather_col, species_success_col = st.columns(2)
+
+
+with weather_col:
+
+    with st.container(border=True):
+
+        st.subheader(
+            "🌦️ Migration Success by Weather"
+        )
+
         st.caption(
-            f"Training records: "
-            f"{metadata.get('train_rows', 0):,} | "
-            f"Test records: "
-            f"{metadata.get('test_rows', 0):,}"
+            "Observed migration success across different weather conditions."
         )
 
-
-st.divider()
-
-
-# ============================================================
-# WEATHER SUCCESS RATE
-# ============================================================
-
-col1, col2 = st.columns(2)
-
-
-with col1:
-
-    st.subheader(
-        "🌦️ Success Rate by Weather Condition"
-    )
-
-    weather = (
-        data.groupby(
-            "Weather_Condition",
-            as_index=False,
-        )["Migration_Success_Num"]
-        .mean()
-    )
-
-    weather["Success Rate"] = (
-        weather["Migration_Success_Num"]
-    )
-
-    chart = (
-        alt.Chart(weather)
-        .mark_bar()
-        .encode(
-            x=alt.X(
-                "Success Rate:Q",
-                axis=alt.Axis(
-                    format="%",
-                ),
-            ),
-            y=alt.Y(
-                "Weather_Condition:N",
-                sort="-x",
-                title=None,
-            ),
-            tooltip=[
+        weather = (
+            data.groupby(
                 "Weather_Condition",
-                alt.Tooltip(
+                as_index=False,
+            )["Migration_Success_Num"]
+            .mean()
+            .rename(
+                columns={
+                    "Migration_Success_Num": "Success Rate"
+                }
+            )
+        )
+
+        chart = (
+            alt.Chart(weather)
+            .mark_bar(
+                cornerRadiusTopRight=5,
+                cornerRadiusBottomRight=5,
+            )
+            .encode(
+                x=alt.X(
                     "Success Rate:Q",
-                    format=".1%",
+                    title="Success Rate",
+                    axis=alt.Axis(format="%"),
                 ),
-            ],
+                y=alt.Y(
+                    "Weather_Condition:N",
+                    title=None,
+                    sort="-x",
+                ),
+                tooltip=[
+                    alt.Tooltip(
+                        "Weather_Condition:N",
+                        title="Weather",
+                    ),
+                    alt.Tooltip(
+                        "Success Rate:Q",
+                        title="Success Rate",
+                        format=".1%",
+                    ),
+                ],
+            )
+            .properties(height=300)
         )
-        .properties(
-            height=300,
-        )
-    )
 
-    st.altair_chart(
-        chart,
-        width="stretch",
-    )
+        st.altair_chart(
+            chart,
+            width="stretch",
+        )
 
 
 # ============================================================
-# SPECIES SUCCESS RATE
+# SPECIES SUCCESS
 # ============================================================
 
-with col2:
+with species_success_col:
 
-    st.subheader(
-        "🐦 Success Rate by Species"
-    )
+    with st.container(border=True):
 
-    species = (
-        data.groupby(
-            "Species",
-            as_index=False,
-        )["Migration_Success_Num"]
-        .mean()
-    )
+        st.subheader(
+            "🐦 Migration Success by Species"
+        )
 
-    species["Success Rate"] = (
-        species["Migration_Success_Num"]
-    )
+        st.caption(
+            "Observed success rates across the bird species in the dataset."
+        )
 
-    chart = (
-        alt.Chart(species)
-        .mark_bar()
-        .encode(
-            x=alt.X(
-                "Success Rate:Q",
-                axis=alt.Axis(
-                    format="%",
-                ),
-            ),
-            y=alt.Y(
-                "Species:N",
-                sort="-x",
-                title=None,
-            ),
-            tooltip=[
+        species = (
+            data.groupby(
                 "Species",
-                alt.Tooltip(
-                    "Success Rate:Q",
-                    format=".1%",
-                ),
-            ],
+                as_index=False,
+            )["Migration_Success_Num"]
+            .mean()
+            .rename(
+                columns={
+                    "Migration_Success_Num": "Success Rate"
+                }
+            )
         )
-        .properties(
-            height=300,
-        )
-    )
 
-    st.altair_chart(
-        chart,
-        width="stretch",
-    )
+        chart = (
+            alt.Chart(species)
+            .mark_bar(
+                cornerRadiusTopRight=5,
+                cornerRadiusBottomRight=5,
+            )
+            .encode(
+                x=alt.X(
+                    "Success Rate:Q",
+                    title="Success Rate",
+                    axis=alt.Axis(format="%"),
+                ),
+                y=alt.Y(
+                    "Species:N",
+                    title=None,
+                    sort="-x",
+                ),
+                tooltip=[
+                    alt.Tooltip(
+                        "Species:N",
+                        title="Species",
+                    ),
+                    alt.Tooltip(
+                        "Success Rate:Q",
+                        title="Success Rate",
+                        format=".1%",
+                    ),
+                ],
+            )
+            .properties(height=300)
+        )
+
+        st.altair_chart(
+            chart,
+            width="stretch",
+        )
 
 
 st.divider()
 
 
 # ============================================================
-# TOP PREDICTIVE FEATURES
+# TOP PREDICTIVE DRIVERS
 # ============================================================
 
 st.subheader("📊 Top Predictive Drivers")
 
-if feature_importance and metrics.empty is False:
+st.caption(
+    "The features identified as most influential by the trained model."
+)
+
+if feature_importance and not metrics.empty:
 
     champion_key = str(
         metadata.get(
@@ -283,11 +337,14 @@ if feature_importance and metrics.empty is False:
 
     if not top_features.empty:
 
-        top_features = top_features.head(10)
+        top_features = top_features.head(10).copy()
 
         chart = (
             alt.Chart(top_features)
-            .mark_bar()
+            .mark_bar(
+                cornerRadiusTopRight=5,
+                cornerRadiusBottomRight=5,
+            )
             .encode(
                 x=alt.X(
                     "importance:Q",
@@ -295,20 +352,22 @@ if feature_importance and metrics.empty is False:
                 ),
                 y=alt.Y(
                     "feature:N",
-                    sort="-x",
                     title=None,
+                    sort="-x",
                 ),
                 tooltip=[
-                    "feature",
+                    alt.Tooltip(
+                        "feature:N",
+                        title="Feature",
+                    ),
                     alt.Tooltip(
                         "importance:Q",
+                        title="Importance",
                         format=".3f",
                     ),
                 ],
             )
-            .properties(
-                height=350,
-            )
+            .properties(height=350)
         )
 
         st.altair_chart(
@@ -325,7 +384,7 @@ if feature_importance and metrics.empty is False:
 else:
 
     st.info(
-        "Train the models to display feature importance."
+        "Train the models to display predictive drivers."
     )
 
 
@@ -340,34 +399,43 @@ st.subheader("📋 Project Overview")
 
 st.write(
     """
-    This project uses machine learning to predict whether a
-    bird migration will be successful or unsuccessful.
+    Bird Migration Analytics uses machine learning to study the
+    conditions associated with successful and unsuccessful bird
+    migration journeys.
 
-    The analysis considers environmental, geographical,
-    flight, behavioural, biological and temporal factors.
+    The project brings together biological, geographical,
+    environmental, flight, behavioural, and temporal information
+    to build predictive models and identify the factors that
+    provide the strongest predictive signals.
 
-    Six classification algorithms are evaluated:
+    The dashboard provides an interactive environment for
+    exploring migration patterns, comparing machine learning
+    models, making individual predictions, and understanding
+    the key factors behind model predictions.
+    """
+)
 
-    • Logistic Regression  
-    • Decision Tree  
-    • K-Nearest Neighbors  
-    • Support Vector Machine  
-    • Gradient Boosting  
-    • Random Forest
+st.markdown(
+    """
+    **The project focuses on three main goals:**
 
-    The best-performing model is selected using evaluation
-    metrics such as F1-score and ROC-AUC rather than assuming
-    Random Forest will always be the winner.
+    - 🔎 **Understand migration patterns** across species,
+      regions, seasons, environments, and habitats.
+    - 🤖 **Predict migration outcomes** using multiple
+      classification algorithms.
+    - 💡 **Explain predictive drivers** and identify the
+      environmental, flight, and behavioural factors most
+      strongly associated with migration success.
     """
 )
 
 
 # ============================================================
-# IMPORTANT NOTE
+# PROJECT NOTE
 # ============================================================
 
 st.info(
-    "Model predictions represent predictive associations "
-    "in the dataset and should not be interpreted as proof "
-    "of biological causation."
+    "The model identifies predictive patterns within the dataset. "
+    "These findings represent associations and should not be "
+    "interpreted as proof of biological causation."
 )
