@@ -622,20 +622,7 @@ Different approaches are used depending on the model type:
 
 Categorical one-hot encoded features are grouped back into their original source features for easier interpretation.
 
----
 
-# 👥 Team Members
-
-This project was developed as a **two-member team**.
-
-| Team Member | Role / Contribution |
-|---|---|
-| **Prashanth K** | Machine Learning development, data analysis, application development, integration and testing |
-| **Leo Samuel Gilbert** | Machine Learning development, data processing, testing and application contribution |
-
-Both team members contributed to the development, testing and completion of the project.
-
----
 
 # 🌿 GitHub Collaboration
 
